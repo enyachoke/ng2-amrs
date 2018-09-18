@@ -10,14 +10,19 @@ export class CommunityGroupService {
 
     public v = 'full';
     constructor(private http: Http,
-                private _appSettingsService: AppSettingsService,
-                private communityGroupAttributeService: CommunityGroupAttributeService) {
+        private _appSettingsService: AppSettingsService,
+        private communityGroupAttributeService: CommunityGroupAttributeService) {
 
     }
 
     public getOpenMrsBaseUrl(): string {
         return this._appSettingsService.getOpenmrsRestbaseurl() + 'cohortm/cohort';
     }
+
+    public getCohortVisitUrl(): string {
+        return this._appSettingsService.getOpenmrsRestbaseurl() + 'cohortm/cohortvisit';
+    }
+    
 
     public searchCohort(searchString: string) {
         const regex = new RegExp(/^\d+$/);
@@ -37,9 +42,9 @@ export class CommunityGroupService {
         return this.http.get(url, {
             search: params
         })
-        .pipe(
-            map((response) => response.json().results)
-        );
+            .pipe(
+                map((response) => response.json().results)
+            );
     }
 
     public getGroupByName(name: string): Observable<any> {
@@ -53,19 +58,26 @@ export class CommunityGroupService {
         );
     }
 
-  public getGroupByUuid(groupUuid: string): Observable<any> {
-      const url = this.getOpenMrsBaseUrl() + `/${groupUuid}`;
-      return this.http.get(url).pipe(
-        map((response) => response.json())
-      );
+    public getGroupByUuid(groupUuid: string): Observable<any> {
+        const url = this.getOpenMrsBaseUrl() + `/${groupUuid}`;
+        return this.http.get(url).pipe(
+            map((response) => response.json())
+        );
     }
 
-  public disbandGroup(uuid: string, endDate: Date): any {
+    public disbandGroup(uuid: string, endDate: Date): any {
         const url = this.getOpenMrsBaseUrl() + `/${uuid}`;
-        const body = {endDate};
+        const body = { endDate };
         return this.http.post(url, body).pipe(
             map((response) => response.json())
-          );
+        );
+    }
+
+    public startGroupVisit(payload): any {
+        const url = this.getCohortVisitUrl();
+        return this.http.post(url, payload).pipe(
+            map((response) => response.json())
+        );
     }
 
     public getGroupAttribute(attributeType: string, attributes: any[]): any {
@@ -90,7 +102,7 @@ export class CommunityGroupService {
         if (attributes) {
             const attributeUrls = this.communityGroupAttributeService.generateAttributeUrls(attributes);
             _.forEach((attributeUrls), (attributeUrl) => {
-              requests.push(this.http.post(attributeUrl['url'], attributeUrl['body']));
+                requests.push(this.http.post(attributeUrl['url'], attributeUrl['body']));
             });
 
         }

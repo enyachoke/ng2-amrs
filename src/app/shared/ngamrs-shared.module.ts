@@ -10,7 +10,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SelectModule } from 'ngx-select';
 
 import {
-  MatProgressSpinnerModule, MatProgressBarModule, MatTabsModule, MatSnackBarModule, MatSlideToggleModule, MatCardModule, MatRadioModule
+  MatProgressSpinnerModule, MatProgressBarModule, MatTabsModule, MatSnackBarModule, MatSlideToggleModule, MatCardModule, MatRadioModule ,
+   MatDatepickerModule
 } from '@angular/material';
 import { CacheService } from 'ionic-cache';
 import { DateTimePickerModule } from 'ngx-openmrs-formentry/dist/ngx-formentry/';
@@ -127,7 +128,8 @@ import { RetrospectiveDataEntryModule
     RetrospectiveDataEntryModule,
     ConfirmDialogModule, DialogModule,
     MatSnackBarModule, NgxPaginationModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDatepickerModule
   ],
   exports: [NgBusyModule, LaddaModule, NgSelectModule, DisplayErrorComponent,
     RetrospectiveDataEntryModule, MatCardModule,
@@ -140,7 +142,7 @@ import { RetrospectiveDataEntryModule
     DateSelectorComponent, PdfViewerComponent, NgxMyDatePickerModule, GeneralLandingPageComponent,
     OpenmrsApi, EtlApi, Ng2Bs3ModalModule, ModalModule, BsDropdownModule, TooltipModule,
     LocationFilterComponent, ToastComponent, Angulartics2Module, MatSnackBarModule, MatTabsModule,
-    MatProgressBarModule, MatProgressSpinnerModule, MatSlideToggleModule, NgxPaginationModule,
+    MatProgressBarModule, MatProgressSpinnerModule, MatSlideToggleModule, NgxPaginationModule,MatDatepickerModule,
     CdmProgramSnapshotComponent, MatRadioModule, FormsModule],
   declarations: [
     DisplayErrorComponent, StringToDatePipe, ZeroVlPipe, Ng2FilterPipe, HivProgramSnapshotComponent,
