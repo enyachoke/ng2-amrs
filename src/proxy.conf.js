@@ -1,7 +1,7 @@
 const PROXY_CONFIG = [
     {
         context: [
-            "/test-amrs"
+            "/amrs"
         ],
         target: "https://ngx.ampath.or.ke",
         secure: false
