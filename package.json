@@ -102,6 +102,7 @@
     "underscore": "^1.8.3",
     "web-animations-js": "^2.2.2",
     "webfont-medical-icons2": "^1.0.0",
+    "amazing-time-picker": "1.5.3",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
