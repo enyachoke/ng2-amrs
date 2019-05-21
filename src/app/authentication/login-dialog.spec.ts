@@ -7,11 +7,15 @@ import {
 import { LoginDialogComponent } from './login-dialog.component';
 import { provideRoutes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { PouchdbService } from '../pouchdb-service/pouchdb.service';
+import { UserDefaultPropertiesService } from '../user-default-properties/user-default-properties.service';
 
 describe('App', () => {
   // provide our implementations or mocks to the dependency injector
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
+      PouchdbService,
+      UserDefaultPropertiesService,
       LoginDialogComponent,
       provideRoutes([])
     ],

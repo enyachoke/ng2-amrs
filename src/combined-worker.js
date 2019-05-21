@@ -1,2 +1,2 @@
-// importScripts('offline-db-sw.js');
+importScripts('./service-workers/main.sw.js')
 importScripts('ngsw-worker.js');

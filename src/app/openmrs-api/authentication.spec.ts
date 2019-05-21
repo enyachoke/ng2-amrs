@@ -9,6 +9,9 @@ import { CookieService, CookieModule } from 'ngx-cookie';
 
 import { Constants } from '../utils/constants';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { PouchdbService } from '../pouchdb-service/pouchdb.service';
+import { UserDefaultPropertiesService } from '../user-default-properties/user-default-properties.service';
+import { UserService } from './user.service';
 
 
 describe('AuthenticationService Unit Tests', () => {
@@ -22,6 +25,9 @@ describe('AuthenticationService Unit Tests', () => {
       declarations: [],
       providers: [
         AppSettingsService,
+        PouchdbService,
+        UserDefaultPropertiesService,
+        UserService,
         SessionService,
         LocalStorageService,
         SessionStorageService,

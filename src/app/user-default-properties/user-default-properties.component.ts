@@ -11,6 +11,7 @@ import {
   RetrospectiveDataEntryService
 } from '../retrospective-data-entry/services/retrospective-data-entry.service';
 import * as _ from 'lodash';
+import { PouchdbService } from '../pouchdb-service/pouchdb.service';
 
 @Component({
   selector: 'user-default-properties',
@@ -31,6 +32,9 @@ export class UserDefaultPropertiesComponent implements OnInit {
   public isLoading: boolean = false;
   public locations: Array<any> = [];
   public currentLocation: any;
+  public offlineLocation: any;
+  public currentOfflineLocation: any;
+  public offlineSyncActive = false;
   public disable = false;
   private retroSettings: any;
 
@@ -40,7 +44,8 @@ export class UserDefaultPropertiesComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private departmentProgramService: DepartmentProgramsConfigService,
     private retrospectiveDataEntryService: RetrospectiveDataEntryService,
-    private propertyLocationService: UserDefaultPropertiesService
+    private propertyLocationService: UserDefaultPropertiesService,
+    private pouchdbservice: PouchdbService
   ) {
 
   }
@@ -54,6 +59,9 @@ export class UserDefaultPropertiesComponent implements OnInit {
     if (!this.currentLocation) {
       this.disable = true;
     }
+
+    this.currentOfflineLocation = JSON.parse(this.propertyLocationService.getUserProperty('offlineLocation'));
+    this.offlineSyncActive = JSON.parse(this.propertyLocationService.getUserProperty('offlineSyncActive'));
     // if the user is confirming, prefill the current location
     this.route.params.subscribe((params: Params) => {
       if (params['confirm'] !== undefined) {
@@ -131,6 +139,16 @@ export class UserDefaultPropertiesComponent implements OnInit {
     const location = JSON.stringify({ uuid: item.value, display: item.label });
     this.propertyLocationService.setUserProperty('userDefaultLocation', location);
     this.propertyLocationService.setUserProperty('retroLocation', JSON.stringify(item));
+  }
+
+  public selectOffline(item: any) {
+    const location = JSON.stringify({ uuid: item.value, display: item.label });
+    this.propertyLocationService.setUserProperty('offlineLocation', location);
+    this.pouchdbservice.triggerPull();
+  }
+
+  public offlineSyncStateChange() {
+    this.propertyLocationService.setUserProperty('offlineSyncActive', JSON.stringify(this.offlineSyncActive));
   }
 
 }

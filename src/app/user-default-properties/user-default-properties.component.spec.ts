@@ -27,6 +27,7 @@ import { ProviderResourceService } from '../openmrs-api/provider-resource.servic
 import { Observable } from 'rxjs';
 import { ReplaySubject } from 'rxjs';
 import 'rxjs/add/observable/of';
+import { PouchdbService } from '../pouchdb-service/pouchdb.service';
 
 class MockActivatedRoute {
   // Observable that contains a map of the parameters
@@ -144,6 +145,7 @@ describe('Component: User Default Settings Unit Tests', () => {
         SessionStorageService,
         LocalStorageService,
         DataCacheService,
+        PouchdbService,
         CacheService,
         {
           provide: CacheStorageService, useFactory: () => {

@@ -14,7 +14,8 @@
           <div *ngIf="isBusy" class="input-group-addon"><i class="fa fa-spinner fa-spin"></i></div>
         </div>
         <div class="float pull-left">
-          <p *ngIf="currentLocation!=''" class="form-text text-bold">Your current location : <span class="current-location">{{currentLocation?.display}}</span>
+          <p *ngIf="currentLocation!=''" class="form-text text-bold">Your current location : <span
+              class="current-location">{{currentLocation?.display}}</span>
           </p>
         </div>
         <div class="float pull-right">
@@ -31,7 +32,8 @@
       <!-- Select department -->
       <div class="form-group" style="margin-top: -20px;">
         <label for="department">Which Patients Do You Want To See?</label><br />
-        <mat-radio-group class="vertical-radio-group" [ngModel]="selectedDepartment" (ngModelChange)="selectDepartment($event)">
+        <mat-radio-group class="vertical-radio-group" [ngModel]="selectedDepartment"
+          (ngModelChange)="selectDepartment($event)">
           <mat-radio-button class="vertical-radio-button" name="" *ngFor="let department of departments;"
             [value]="department.itemName" color="primary">
             {{ department?.itemName }} Patients
@@ -39,7 +41,27 @@
         </mat-radio-group>
       </div>
       <div class="clear">&nbsp;</div>
-
+      <div class="form-group" style="margin-top: -20px;">
+        <mat-checkbox color="primary" [(ngModel)]="offlineSyncActive" (ngModelChange)="offlineSyncStateChange()">Offline Sync Active</mat-checkbox>
+      </div>
+      <div  *ngIf="offlineSyncActive" class="form-group">
+        <label for="location">Offline Location</label>
+        <div class="input-group">
+          <div class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></div>
+          <ng-select class="sharp-corners" placeholder="Please type to search" id="location" [(ngModel)]="offlineLocation"
+            [items]="locations" (change)="selectOffline($event)"></ng-select>
+          <div *ngIf="isBusy" class="input-group-addon"><i class="fa fa-spinner fa-spin"></i></div>
+        </div>
+        <div class="float pull-left">
+          <p *ngIf="currentLocation!=''" class="form-text text-bold">Current offline location : <span
+              class="current-location">{{currentOfflineLocation?.display}}</span>
+          </p>
+        </div>
+        <div class="float pull-right">
+          <span class="text-bold" *ngIf="location && !confirming">New offline Location: {{offlineLocation?.label}}</span>
+        </div>
+        <div class="clear clearfix">&nbsp;</div>
+      </div>
     </div>
     <!--<retrospective-data-entry-settings></retrospective-data-entry-settings>-->
     <div style="margin-top: -15px;">

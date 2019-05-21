@@ -21,8 +21,10 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/service-workers",
               "src/manifest.json",
               "src/combined-worker.js"
+
             ],
             "styles": [
               "src/styles.css",

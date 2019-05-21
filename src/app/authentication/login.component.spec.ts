@@ -26,6 +26,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { SwUpdate } from '@angular/service-worker';
 import { Subject } from 'rxjs';
+import { PouchdbService } from '../pouchdb-service/pouchdb.service';
 
 describe('LoginComponent Unit Tests', () => {
   class MockSwUpdate {
@@ -48,6 +49,7 @@ describe('LoginComponent Unit Tests', () => {
       AuthenticationService,
       AppSettingsService,
       SessionService,
+      PouchdbService,
       LocalStorageService,
       SessionStorageService,
       CookieService,

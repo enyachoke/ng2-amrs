@@ -73,7 +73,9 @@ import 'core-js/es7/reflect';
  * Zone JS is required by default for Angular itself.
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
-
+(window as any).global = window;
+(window as any).process = {};
+(window as any).process.nextTick = setTimeout;
 
 
 /***************************************************************************************************

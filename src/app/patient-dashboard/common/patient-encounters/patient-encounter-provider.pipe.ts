@@ -12,9 +12,9 @@ import * as _ from 'lodash';
 export class PatientEncounterProviderPipe implements PipeTransform {
 
      public transform(provider) {
-          if (provider.length === 0) {
+          if (provider && provider.length === 0) {
                return provider;
-          } else {
+          } else if (provider) {
 
                const providerName = provider.split('-')[2];
 
@@ -25,6 +25,8 @@ export class PatientEncounterProviderPipe implements PipeTransform {
                     return '';
                }
 
+          } else {
+               return '';
           }
 
      }

@@ -16,6 +16,9 @@ import { SessionService } from '../openmrs-api/session.service';
 import { CookieModule } from 'ngx-cookie';
 import { CookieService } from 'ngx-cookie';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { PouchdbService } from '../pouchdb-service/pouchdb.service';
+import { UserDefaultPropertiesService } from '../user-default-properties';
+import { UserService } from '../openmrs-api/user.service';
 
 describe('AppSettingsComponent Tests', () => {
   let comp: AppSettingsComponent;
@@ -35,6 +38,9 @@ describe('AppSettingsComponent Tests', () => {
       providers: [
         { provide: APP_BASE_HREF, useValue: '/' },
         AppSettingsService,
+        PouchdbService,
+        UserDefaultPropertiesService,
+        UserService,
         AuthenticationService,
         SessionService,
         CookieService,

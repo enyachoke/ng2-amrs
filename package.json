@@ -11,12 +11,13 @@
     "test-debug": "ng test --browsers ChromeDebug",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-prod": "node version.js && bash ./scripts/ng.sh build --prod --aot --optimization=false",
+    "build-prod": "node version.js && bash ./scripts/ng.sh build --prod --aot --stats-json --optimization=false",
     "serve:prod": "http-server dist/ngx-amrs/ -P https://ngx.ampath.or.ke",
     "prebuild": "node version.js",
-    "prestart": "node version.js"
+    "prestart": "node version.js",
+    "analyzer": "webpack-bundle-analyzer dist/stats.json"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^6.1.0",
     "@angular/cdk": "^6.1.0",
@@ -88,6 +89,7 @@
     "pdfmake": "0.1.25",
     "postcss-url": "^8.0.0",
     "pouchdb": "^7.0.0",
+    "pouchdb-browser": "^7.0.0",
     "pouchdb-find": "^7.0.0",
     "pouchdb-upsert": "^2.2.0",
     "primeicons": "^1.0.0-beta.6",
@@ -97,10 +99,12 @@
     "rxjs-compat": "^6.2.2",
     "save": "^2.3.2",
     "semver": "^5.3.0",
+    "simple-crypto-js": "^2.0.2",
     "slimscroll": "^0.9.1",
     "tether": "^1.4.0",
     "uglify-es": "^3.3.9",
     "underscore": "^1.8.3",
+    "uuid": "^3.3.2",
     "web-animations-js": "^2.2.2",
     "webfont-medical-icons2": "^1.0.0",
     "zone.js": "^0.8.26"
@@ -134,7 +138,8 @@
     "source-map-support": "^0.5.9",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
-    "typescript": "~2.7.2"
+    "typescript": "~2.7.2",
+    "webpack-bundle-analyzer": "^3.0.3"
   },
   "browser": {
     "fs": false,

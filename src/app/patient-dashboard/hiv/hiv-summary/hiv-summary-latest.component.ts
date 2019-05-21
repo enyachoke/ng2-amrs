@@ -51,11 +51,10 @@ export class HivSummaryLatestComponent implements OnInit, OnDestroy {
     const summarySub = this.hivSummaryService.getHivSummary(
       patientUuid, 0, 1, false).subscribe((data) => {
         if (data) {
-
           for (const summary of data) {
 
             // check if encounter is clinical
-            if (summary.is_clinical_encounter === 1) {
+            if (summary.is_clinical_encounter) {
 
               this.hivSummary = summary;
               const artStartDate =
@@ -68,8 +67,7 @@ export class HivSummaryLatestComponent implements OnInit, OnDestroy {
 
             }
 
-          }
-
+         }
           const lastVlDate: any = this.getLatestVlDate(data);
           if (this.endDateIsBeforeStartDate(this.hivSummary.vl_1_date, lastVlDate)) {
             const filtered = _.find(data, (summaryObj: any) => {

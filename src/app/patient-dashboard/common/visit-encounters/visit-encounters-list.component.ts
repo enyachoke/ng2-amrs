@@ -113,19 +113,17 @@ export class VisitEncountersListComponent implements OnInit, OnChanges {
             }
 
             let provider = '';
-
-            if (encounter.encounterProviders !== null) {
+            if (encounter.encounterProviders || encounter.encounterProviders.length > 0) {
                 const encounterProvider = encounter.encounterProviders[0];
-                if (typeof encounterProvider !== 'undefined') {
+                if (encounterProvider) {
 
-                    if (encounterProvider.provider !== null) {
+                    if (encounterProvider.provider) {
 
-                        if (encounterProvider.provider.display !== null) {
-
+                        if (encounterProvider.provider.display) {
                             const displayMinusAttribute =
                                 encounterProvider.provider.display.split('-')[2];
 
-                            if (typeof displayMinusAttribute !== 'undefined') {
+                            if (displayMinusAttribute) {
 
                                 provider = encounterProvider.provider.display.split('-')[2];
 
@@ -159,8 +157,9 @@ export class VisitEncountersListComponent implements OnInit, OnChanges {
                 const visitTypeTitle = encounter.visit.display;
 
                 visitType = visitTypeTitle.split('VISIT')[0] + ' VISIT';
-
-                createdBy = encounter.visit.auditInfo.creator.display;
+                if (encounter.visit.auditInfo) {
+                    createdBy = encounter.visit.auditInfo.creator.display;
+                }
 
             } else {
                 visitType = '';
@@ -321,11 +320,15 @@ export class VisitEncountersListComponent implements OnInit, OnChanges {
     public editEncounter(encounter: any) {
         if (encounter) {
             // get visitType and add it to the url
-            const visitTypeUuid = this.getVisitTypeUuid(encounter);
-                this.router.navigate(['../formentry', encounter.form.uuid], {
-                    relativeTo: this.route,
-                    queryParams: { encounter: encounter.uuid , visitTypeUuid: visitTypeUuid }
-                });
+            let visitType = '';
+            if (encounter.visit && encounter.visit !== null) {
+                const visit: any = encounter.visit;
+                visitType = visit.uuid;
+            }
+            this.router.navigate(['../formentry', encounter.form.uuid], {
+                relativeTo: this.route,
+                queryParams: { encounter: encounter.uuid, visitTypeUuid: visitType }
+            });
         }
     }
     public getVisitTypeUuid(encounter: any) {

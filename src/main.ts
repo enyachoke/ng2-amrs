@@ -9,8 +9,14 @@ if (environment.production) {
 
 // platformBrowserDynamic().bootstrapModule(AppModule)
 //   .catch(err => console.log(err));
-  platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
-    if ('serviceWorker' in navigator && environment.production) {
-       navigator.serviceWorker.register('ngsw-worker.js');
-    }
-  }).catch(err => console.log(err));
+platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
+  if ('serviceWorker' in navigator && environment.production) {
+    navigator.serviceWorker.register('./combined-worker.js');
+    navigator.serviceWorker.ready.then(function (swRegistration) {
+      return swRegistration.sync.register('firstPatientSync');
+    });
+    navigator.serviceWorker.ready.then(function (swRegistration) {
+      return swRegistration.sync.register('firstMetaDataSync');
+    });
+  }
+}).catch(err => console.log(err));

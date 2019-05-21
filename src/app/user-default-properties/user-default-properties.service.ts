@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class UserDefaultPropertiesService {
 
   public locationSubject = new BehaviorSubject<any>('');
+  public propertiesChanged = new BehaviorSubject<any>(false);
   private user: User;
 
   constructor(

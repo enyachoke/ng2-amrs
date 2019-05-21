@@ -73,6 +73,7 @@ import { PocHttpInteceptor } from './services/poc-http-interceptor';
 import { SelectDepartmentService } from './services/select-department.service';
 
 import { RisonService } from './services/rison-service';
+import { OfflineSyncMetricsService } from './services/offline-sync-metrics.service';
 
 @NgModule({
   imports: [
@@ -136,7 +137,7 @@ import { RisonService } from './services/rison-service';
     CdmProgramSnapshotComponent
   ],
   providers: [Ng2FilterPipe, StringToDatePipe, ZeroVlPipe, RoutesProviderService,
-    HivSummaryService, RisonService, SelectDepartmentService,
+    HivSummaryService, RisonService, SelectDepartmentService, OfflineSyncMetricsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: PocHttpInteceptor,
