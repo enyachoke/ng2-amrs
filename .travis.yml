@@ -19,9 +19,17 @@ addons:
     packages:
     - sshpass
     - google-chrome-stable
+deploy:
+  provider: s3
+  access_key_id: "$DIGITAL_OCEAN_SPACES_KEY_ID"
+  secret_access_key: "$DIGITAL_OCEAN_SPACES_ACCESS_KEY"
+  bucket: "$DIGITAL_OCEAN_SPACES_BUCKET"
+  endpoint: "$DIGITAL_OCEAN_SPACES_ENDPOINT"
+  cache-control: "max-age=31536000"
+  local_dir: $TRAVIS_BRANCH
+  skip_cleanup: true
+  acl: public_read
+  on:
+    all_branches: true
 after_success:
 - mv dist/ngx-amrs $TRAVIS_BRANCH
-- tar -czf build.tgz $TRAVIS_BRANCH
-- export SSHPASS=$DEPLOY_PASS
-- sshpass -e scp -o stricthostkeychecking=no build.tgz $DEPLOY_USER@$DEPLOY_HOST:./
-- sshpass -e ssh -o stricthostkeychecking=no $DEPLOY_USER@$DEPLOY_HOST ./deploy-build.sh
