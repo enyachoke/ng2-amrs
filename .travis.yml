@@ -19,6 +19,7 @@ addons:
     packages:
     - sshpass
     - google-chrome-stable
+    - libssl1.0.0
 deploy:
   provider: s3
   access_key_id: "$DIGITAL_OCEAN_SPACES_KEY_ID"
