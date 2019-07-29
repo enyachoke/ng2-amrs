@@ -29,7 +29,7 @@ deploy:
   bucket: "$DIGITAL_OCEAN_SPACES_BUCKET"
   endpoint: "$DIGITAL_OCEAN_SPACES_ENDPOINT"
   cache-control: "max-age=31536000"
-  local_dir: $TRAVIS_BRANCH
+  local_dir: dist/ngx-amrs
   skip_cleanup: true
   acl: public_read
   on:
