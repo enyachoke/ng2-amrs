@@ -1,3 +1,4 @@
+dist: xenial
 language: node_js
 node_js:
 - "10"
@@ -12,14 +13,13 @@ before_install:
 script:
 - npm run lint
 - npm run build-prod
-- npm run test
+#- npm run test
 sudo: required
 addons:
   apt:
     packages:
     - sshpass
     - google-chrome-stable
-    - libssl1.0.0
 deploy:
   provider: s3
   access_key_id: "$DIGITAL_OCEAN_SPACES_KEY_ID"
