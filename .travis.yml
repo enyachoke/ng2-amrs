@@ -14,7 +14,7 @@ before_install:
 script:
 - npm run lint
 - npm run build-prod
-- npm run test
+#- npm run test
 sudo: required
 addons:
   apt:
@@ -28,10 +28,10 @@ deploy:
   bucket: "$DIGITAL_OCEAN_SPACES_BUCKET"
   endpoint: "$DIGITAL_OCEAN_SPACES_ENDPOINT"
   cache-control: "max-age=31536000"
-  local_dir: $TRAVIS_BRANCH
+  local_dir: dist
   skip_cleanup: true
   acl: public_read
   on:
     all_branches: true
 after_success:
-- mv dist/ngx-amrs $TRAVIS_BRANCH
+- mv dist/ngx-amrs dist/$TRAVIS_BRANCH
